@@ -17,8 +17,7 @@ def merge(Pipeline p){
       } else {
           println "\u001b[31mMerge Failed!!!\u001b[0m"
           println "Error message : \u001b[31m${parsed_pr_merge_response['message']}\u001b[0m"
-          error "Failed to merge,
-                ${parsed_pr_merge_response['message']}"
+          error "Failed to merge, ${parsed_pr_merge_response['message']}"
       }
    } else {
        def pr_check_response = httpRequest authentication: 'github-personal', httpMode: 'GET', url: "https://api.github.com/repos/${p.git_user}/${p.repository_name}/pulls/${p.pr_num}", validResponseCodes: '200,405,409', wrapAsMultipart: false
