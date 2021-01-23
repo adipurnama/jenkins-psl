@@ -8,6 +8,7 @@ def main(script) {
     // Object initialization
    c = new Config()
    s_pre_build = new prebuild()
+   s_build = new build()
 
 
    // Pipeline specific variable get from injected env
@@ -18,6 +19,9 @@ def main(script) {
    def docker_user = ("${script.env.docker_user}" != "null") ? "${script.env.docker_user}" : ""
    def app_port = ("${script.env.app_port}" != "null") ? "${script.env.app_port}" : ""
    def pr_num = ("${script.env.pr_num}" != "null") ? "${script.env.pr_num}" : ""
+
+   // Have default value
+   def docker_registry = ("${script.env.docker_registry}" != "null") ? "${script.env.docker_registry}" : "${c.default_docker_registry}"
 
     // Object initialization
 
@@ -33,6 +37,7 @@ def main(script) {
        app_port,
        pr_num,
        dockerTool,
+       docker_registry,
    )
 
 
@@ -49,13 +54,9 @@ def main(script) {
            s_pre_build.checkoutBuildTest(p)
        }
 
-       //stage('Pre Build - Checkout & Test') {
-            // TODO: Call pre build checkout & test function
-       //}
-
-       //stage('Build & Push Image') {
-           // TODO: Call build & push image function
-       //}
+       stage('Build & Push Image') {
+           s_build.build(p)
+       }
 
        //stage('Merge') {
            // TODO: Call merge function
