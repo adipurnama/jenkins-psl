@@ -23,7 +23,7 @@ class Pipeline {
        String pr_num,
        String dockerTool,
        docker_registry,
-       timeout_hc,
+       timeout_hc
    ){
        this.repository_name = repository_name
        this.branch_name = branch_name
