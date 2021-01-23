@@ -9,7 +9,7 @@ def main(script) {
    c = new Config()
    s_pre_build = new prebuild()
    s_build = new build()
-
+   s_post_build = new postbuild()
 
    // Pipeline specific variable get from injected env
    // Mandatory variable will be check at details & validation steps
@@ -58,9 +58,9 @@ def main(script) {
            s_build.build(p)
        }
 
-       //stage('Merge') {
-           // TODO: Call merge function
-       //}
+       stage('Merge') {
+           s_post_build.merge(p)
+       }
 
        //stage('Deploy') {
            // TODO: Call deploy function
