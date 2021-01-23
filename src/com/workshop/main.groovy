@@ -75,6 +75,10 @@ def main(script) {
        stage('Service Healthcheck') {
            s_post_deploy.healthcheck(p)
        }
+
+       stage('Delete Old Image') {
+           s_post_deploy.deleteOldImage(p)
+       }
     }
 }
 
